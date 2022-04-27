@@ -1,0 +1,38 @@
+stages:
+  extrahieren:
+    cmd: python src/0-extrahieren.py
+    deps:
+    - evaluate
+    - src/0-extrahieren.py
+    outs:
+    - data/extrahiert
+  aufbereiten:
+    cmd: python src/2-aufbereiten.py
+    deps:
+    - data/extrahiert
+    - src/2-aufbereiten.py
+    outs:
+    - Aufbereiten
+  funktionalisieren:
+    cmd: python src/3-funktionalisieren.py
+    deps:
+    - Aufbereiten
+    - src/3-funktionalisieren.py
+    outs:
+    - funktionalisieren
+  trainieren:
+    cmd: python src/4-trainieren.py
+    deps:
+    - funktionalisieren
+    - src/4-trainieren.py
+    params:
+    - trainieren.n_schaetzer
+    outs:
+    - Modell
+  evaluieren:
+    cmd: python src/5-evaluieren.py
+    deps:
+    - Modell/modell_ansatz2.sav
+    - src/5-evaluieren.py
+    outs:
+    - Metrik

@@ -1,0 +1,79 @@
+schema: '2.0'
+stages:
+  extrahieren:
+    cmd: python src/0-extrahieren.py
+    deps:
+    - path: evaluate
+      md5: 22738341dc89dc1de793319ef2ed56a4.dir
+      size: 357087247
+      nfiles: 6
+    - path: src/0-extrahieren.py
+      md5: 340a1cee68560fd8cfd07d316329c1c0
+      size: 14323
+    outs:
+    - path: data/extrahiert
+      md5: 535894c1519eac17d3566f9afdca82c4.dir
+      size: 33708846
+      nfiles: 6
+  aufbereiten:
+    cmd: python src/2-aufbereiten.py
+    deps:
+    - path: data/extrahiert
+      md5: 535894c1519eac17d3566f9afdca82c4.dir
+      size: 33708846
+      nfiles: 6
+    - path: src/2-aufbereiten.py
+      md5: 5b81d26eff71009f75937051a78e2248
+      size: 19274
+    outs:
+    - path: Aufbereiten
+      md5: 233a20e3bf23b224f1a889481c756aad.dir
+      size: 383584
+      nfiles: 1
+  funktionalisieren:
+    cmd: python src/3-funktionalisieren.py
+    deps:
+    - path: Aufbereiten
+      md5: 233a20e3bf23b224f1a889481c756aad.dir
+      size: 383584
+      nfiles: 1
+    - path: src/3-funktionalisieren.py
+      md5: 1c1e8e1724eeab589e1bd326a4205163
+      size: 4839
+    outs:
+    - path: funktionalisieren
+      md5: 9d29dd91e3931000d6ed0f0f14d11447.dir
+      size: 258927
+      nfiles: 4
+  trainieren:
+    cmd: python src/4-trainieren.py
+    deps:
+    - path: funktionalisieren
+      md5: 9d29dd91e3931000d6ed0f0f14d11447.dir
+      size: 258927
+      nfiles: 4
+    - path: src/4-trainieren.py
+      md5: e15e1765f369722ce7ffed681646a1fd
+      size: 952
+    params:
+      params.yaml:
+        trainieren.n_schaetzer: 100
+    outs:
+    - path: Modell
+      md5: 5012633420668701fb6731a8c0efc8b1.dir
+      size: 328626
+      nfiles: 1
+  evaluieren:
+    cmd: python src/5-evaluieren.py
+    deps:
+    - path: Modell/modell_ansatz2.sav
+      md5: 3c42ee42ee498215a5e4bbb8526efe43
+      size: 328626
+    - path: src/5-evaluieren.py
+      md5: 76f8cda75fffffc2341119073bdf715a
+      size: 2091
+    outs:
+    - path: Metrik
+      md5: 26be4f1b1c41d8de418b5588d0d614e3.dir
+      size: 39
+      nfiles: 1

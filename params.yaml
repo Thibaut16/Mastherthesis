@@ -1,0 +1,46 @@
+extrahieren:
+    # ges_one:  KBI_angez_Geschw[Unit_KiloMeterPerHour]
+    # ges_two: 0
+    # ges_three : 100.167423
+    # ges_four: 168
+
+    # bsl_one: BSL_ZAS_Kl_15[]
+    # bsl_two: 0
+    # bsl_three: 1 
+    # bsl_four: 1
+
+    # kbi_one: KBI_Kilometerstand[Unit_KiloMeter]
+    # kbi_two: 0
+    # kbi_three: 36856.50
+    # kbi_four: 37088
+
+    # MO_one: MO1_Drehzahl_valid[1] 
+    # MO_two: 0
+    # MO_three: 0.9
+    # MO_four: 1
+    
+  #time: time
+  #suche: False
+# validieren:
+#    features:{1:[min, mean,s,max], 2:[min, mean,s,max], 
+#              3:[min, mean,s,max], 4:[min, mean,s,max], }
+aufbereiten:
+   
+    #suche: False
+
+funktionalisieren:
+    #modell: Randomforest
+    split: 0.20
+    n_schaetzer: 100
+
+trainieren:
+    #max_leaf_nodes: 5 
+    #random_state:  0
+    n_schaetzer: 100
+    #modell: Randomforest
+
+evaluieren:
+
+# validieren:
+
+
